@@ -1,0 +1,124 @@
+Pizza Restaurants API
+A RESTful Flask API for managing pizzas, restaurants, and their relationships, including pricing and menu management.
+
+Table of Contents
+Project Description
+
+Setup Instructions
+
+Running the Application
+
+Database Seeding
+
+API Endpoints
+
+Validation Rules
+
+Error Handling
+
+Future Improvements
+
+Project Description
+This project is a Flask-based API that allows users to view, add, and delete pizzas, restaurants, and associate pizzas with restaurants including a price. It uses SQLAlchemy ORM for database interactions and Flask Blueprints for modular routing. The API supports standard CRUD operations with input validation and proper HTTP responses.
+
+Setup Instructions
+Clone the repository
+
+bash
+Copy
+Edit
+git clone <your-repo-url>
+cd pizza-api-challenge
+Create a virtual environment and activate it
+
+bash
+Copy
+Edit
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+Install dependencies
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Set environment variables (optional)
+
+You can configure your database URL or other configs via environment variables or the Config class.
+
+Initialize the database and seed data
+
+bash
+Copy
+Edit
+python seed.py
+Running the Application
+Start the Flask development server:
+
+bash
+Copy
+Edit
+flask run
+The API will be available at http://127.0.0.1:5000/.
+
+Database Seeding
+Running python seed.py will:
+
+Drop all existing tables
+
+Create new tables
+
+Add sample pizzas and restaurants
+
+Add sample restaurant-pizza associations with prices
+
+API Endpoints
+Restaurants
+GET /restaurants — List all restaurants
+
+GET /restaurants/<int:id> — Get restaurant by ID with pizzas included
+
+DELETE /restaurants/<int:id> — Delete a restaurant
+
+Pizzas
+GET /pizzas — List all pizzas
+
+GET /pizzas/<int:id> — Get pizza by ID
+
+Restaurant Pizzas
+POST /restaurant_pizzas — Create a restaurant-pizza with price
+Request JSON:
+
+json
+Copy
+Edit
+{
+  "price": 10,
+  "pizza_id": 1,
+  "restaurant_id": 2
+}
+DELETE /restaurant_pizzas/<int:id> — Delete a restaurant-pizza association
+
+Validation Rules
+Price for restaurant-pizza must be an integer between 1 and 30.
+
+Pizza and Restaurant IDs must exist before associating.
+
+Returns 400 for validation errors, 404 for not found.
+
+Error Handling
+404 Not Found if resource does not exist
+
+400 Bad Request for invalid data or validation errors
+
+500 Internal Server Error for unexpected errors
+
+Response example for not found:
+
+json
+Copy
+Edit
+{
+  "error": "Restaurant not found"
+}
+
