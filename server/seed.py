@@ -9,27 +9,32 @@ from server.models.pizza import Pizza
 from server.models.restaurant_pizza import RestaurantPizza
 
 with app.app_context():
-    # Drop all and create tables again (only for dev/test, not production)
     db.drop_all()
     db.create_all()
 
-    # Add pizzas
+    
     pepperoni = Pizza(name="Pepperoni", ingredients="Dough, Tomato Sauce, Cheese, Pepperoni")
     margherita = Pizza(name="Margherita", ingredients="Dough, Tomato Sauce, Mozzarella, Basil")
-    db.session.add_all([pepperoni, margherita])
+    hawaiian = Pizza(name="Hawaiian", ingredients="Dough, Tomato Sauce, Cheese, Ham, Pineapple")
+    veg_extravaganza = Pizza(name="Veg Extravaganza", ingredients="Dough, Tomato Sauce, Cheese, Bell Peppers, Olives, Onions, Mushrooms")
+    db.session.add_all([pepperoni, margherita, hawaiian, veg_extravaganza])
 
-    # Add restaurants
-    dominos = Restaurant(name="Domino's", address="123 Pizza Street")
-    kikis = Restaurant(name="Kiki's Pizza", address="456 Crust Ave")
-    db.session.add_all([dominos, kikis])
+    
+    elaines = Restaurant(name="Elaine's Pizza", address="12 Westlands, Nairobi")
+    mama_roma = Restaurant(name="Mama Roma", address="45 Kenyatta Avenue, Nairobi")
+    nyama_choma = Restaurant(name="Nyama Choma Pizza", address="23 Moi Avenue, Nairobi")
+    safari_slice = Restaurant(name="Safari Slice", address="78 Mombasa Road, Nairobi")
+    db.session.add_all([elaines, mama_roma, nyama_choma, safari_slice])
 
-    # Commit first to generate IDs
     db.session.commit()
 
-    # Add restaurant pizzas now that IDs are generated
-    rp1 = RestaurantPizza(price=10, pizza_id=pepperoni.id, restaurant_id=dominos.id)
-    rp2 = RestaurantPizza(price=12, pizza_id=margherita.id, restaurant_id=kikis.id)
-    db.session.add_all([rp1, rp2])
+    
+    rp1 = RestaurantPizza(price=15, pizza_id=pepperoni.id, restaurant_id=elaines.id)
+    rp2 = RestaurantPizza(price=18, pizza_id=margherita.id, restaurant_id=mama_roma.id)
+    rp3 = RestaurantPizza(price=20, pizza_id=hawaiian.id, restaurant_id=nyama_choma.id)
+    rp4 = RestaurantPizza(price=16, pizza_id=veg_extravaganza.id, restaurant_id=safari_slice.id)
+    db.session.add_all([rp1, rp2, rp3, rp4])
+
     db.session.commit()
 
     print("Database seeded successfully!")

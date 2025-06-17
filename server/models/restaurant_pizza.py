@@ -9,11 +9,11 @@ class RestaurantPizza(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"), nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey("pizzas.id"), nullable=False)
 
-    # Relationships
+
     restaurant = db.relationship("Restaurant", back_populates="restaurant_pizzas")
     pizza = db.relationship("Pizza", back_populates="restaurant_pizzas")
 
-    # Validation for price: must be between 1 and 30
+    
     @staticmethod
     def validate_price(price):
         if price < 1 or price > 30:

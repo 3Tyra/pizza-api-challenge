@@ -7,7 +7,7 @@ class Pizza(db.Model):
     name = db.Column(db.String, nullable=False)
     ingredients = db.Column(db.String, nullable=False)
 
-    # Relationship: One pizza has many RestaurantPizzas
+    
     restaurant_pizzas = db.relationship(
         "RestaurantPizza",
         back_populates="pizza",
