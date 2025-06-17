@@ -94,8 +94,8 @@ Copy
 Edit
 {
   "price": 15,
-  "pizza_id": 3,
-  "restaurant_id": 2
+  "pizza_id": 1,
+  "restaurant_id": 1
 }
 
 DELETE /restaurant_pizzas/<int:id> — Delete a restaurant-pizza association

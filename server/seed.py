@@ -14,27 +14,21 @@ with app.app_context():
 
     
     pepperoni = Pizza(name="Pepperoni", ingredients="Dough, Tomato Sauce, Cheese, Pepperoni")
-    margherita = Pizza(name="Margherita", ingredients="Dough, Tomato Sauce, Mozzarella, Basil")
     hawaiian = Pizza(name="Hawaiian", ingredients="Dough, Tomato Sauce, Cheese, Ham, Pineapple")
-    veg_extravaganza = Pizza(name="Veg Extravaganza", ingredients="Dough, Tomato Sauce, Cheese, Bell Peppers, Olives, Onions, Mushrooms")
-    db.session.add_all([pepperoni, margherita, hawaiian, veg_extravaganza])
+    db.session.add_all([pepperoni, hawaiian])
 
     
     elaines = Restaurant(name="Elaine's Pizza", address="12 Westlands, Nairobi")
     mama_roma = Restaurant(name="Mama Roma", address="45 Kenyatta Avenue, Nairobi")
-    nyama_choma = Restaurant(name="Nyama Choma Pizza", address="23 Moi Avenue, Nairobi")
-    safari_slice = Restaurant(name="Safari Slice", address="78 Mombasa Road, Nairobi")
-    db.session.add_all([elaines, mama_roma, nyama_choma, safari_slice])
+    db.session.add_all([elaines, mama_roma])
 
     db.session.commit()
 
     
     rp1 = RestaurantPizza(price=15, pizza_id=pepperoni.id, restaurant_id=elaines.id)
-    rp2 = RestaurantPizza(price=18, pizza_id=margherita.id, restaurant_id=mama_roma.id)
-    rp3 = RestaurantPizza(price=20, pizza_id=hawaiian.id, restaurant_id=nyama_choma.id)
-    rp4 = RestaurantPizza(price=16, pizza_id=veg_extravaganza.id, restaurant_id=safari_slice.id)
-    db.session.add_all([rp1, rp2, rp3, rp4])
+    rp2 = RestaurantPizza(price=18, pizza_id=hawaiian.id, restaurant_id=mama_roma.id)
+    db.session.add_all([rp1, rp2])
 
     db.session.commit()
 
-    print("Database seeded successfully!")
+    
