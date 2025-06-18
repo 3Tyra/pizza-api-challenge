@@ -12,10 +12,9 @@ This is a Flask-based API that allows users to manage pizzas, restaurants, and t
 
 ## Setup Instructions
 
-1. Clone the repository:
+1. Navigate into project directory:
 
 ```bash
-git clone <your-repo-url>
 cd pizza-api-challenge
 ```
 
